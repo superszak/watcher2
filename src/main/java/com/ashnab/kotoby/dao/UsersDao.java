@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
-/**
- * Created by Mohamed on 5/31/2014
- */
 @Repository
 public class UsersDao {
 
