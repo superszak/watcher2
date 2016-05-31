@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/hello")
                 .loginProcessingUrl("/login/authenticate")
                 .failureUrl("/login?param.error=bad_credentials")
                 .permitAll()

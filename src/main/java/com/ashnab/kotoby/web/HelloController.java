@@ -28,7 +28,7 @@ public class HelloController {
     @RequestMapping(method=RequestMethod.GET)
     public String helloTwitter(Model model) {
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            return "redirect:/connect/twitter";
+            return "redirect:/connect/twitterConnected";
         }
 
         model.addAttribute(twitter.userOperations().getUserProfile());
