@@ -18,9 +18,6 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 import javax.sql.DataSource;
 
-/**
- * Created by Mohamed on 5/29/2014
- */
 @Configuration
 @EnableSocial
 public class SocialConfig implements SocialConfigurer {
