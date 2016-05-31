@@ -8,7 +8,7 @@ public class AuthController {
 
     @RequestMapping("/auth/twitter")
     public String twitter() {
-        return "twitter";
+        return "/connect/twitterConnected";
     }
 
 }
