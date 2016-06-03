@@ -17,8 +17,9 @@ public class AuthController {
     @RequestMapping("*")
     public String hello(HttpServletRequest request) {
         System.out.println(request.getServletPath());
-        System.out.println("\n\n\n!!!\nHELO MOT\n!!!\n\n\n");
         return "connect/twitterConnected";
     }
+
+
 
 }

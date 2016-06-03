@@ -29,6 +29,11 @@ public class FriendsController {
         this.connectionRepository = connectionRepository;
     }
 
+    @RequestMapping("/connect/friends")
+    public String friends() {
+        return "connect/friends";
+    }
+
     @RequestMapping(method= RequestMethod.GET)
     public String helloTwitter(Model model) {
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
@@ -38,7 +43,6 @@ public class FriendsController {
         model.addAttribute(twitter.userOperations().getUserProfile());
         CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
         model.addAttribute("friends", followers);
-        System.out.println("\n\nBEEN THERE DONW THAT\n\n");
-        return "hello";
+        return "connect/twitterConnected";
     }
 }
