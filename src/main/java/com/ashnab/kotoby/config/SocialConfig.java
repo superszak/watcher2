@@ -3,7 +3,10 @@ package com.ashnab.kotoby.config;
 import com.ashnab.kotoby.dao.UsersDao;
 import com.ashnab.kotoby.services.AccountConnectionSignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.UserIdSource;
@@ -19,12 +22,16 @@ import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableSocial
 public class SocialConfig implements SocialConfigurer {
+
+    private String key;
+    private String secret;
 
     @Autowired
     private DataSource dataSource;
@@ -34,9 +41,11 @@ public class SocialConfig implements SocialConfigurer {
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
+        this.key = environment.getProperty("spring.social.twitter.consumerKey");
+        this.secret = environment.getProperty("spring.social.twitter.consumerSecret");
         connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(
-                environment.getProperty("twitter.consumerKey"),
-                environment.getProperty("twitter.consumerSecret")));
+                key,
+                secret));
     }
 
     @Override
@@ -49,5 +58,12 @@ public class SocialConfig implements SocialConfigurer {
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,connectionFactoryLocator, Encryptors.noOpText());
         repository.setConnectionSignUp(new AccountConnectionSignUpService(usersDao));
         return repository;
+    }
+
+    @Bean
+    @Scope(value="request", proxyMode= ScopedProxyMode.INTERFACES)
+    public Twitter twitter(ConnectionRepository connectionRepository) {
+        Connection<Twitter> twitter = connectionRepository.findPrimaryConnection(Twitter.class);
+        return (twitter != null) ? twitter.getApi() : new TwitterTemplate(key, secret);
     }
 }
