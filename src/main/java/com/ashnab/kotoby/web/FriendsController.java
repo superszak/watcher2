@@ -8,7 +8,7 @@ public class FriendsController {
 
     @RequestMapping("/connect/friends")
     public String friends() {
-        return "/connect/friends";
+        return "connect/friends";
     }
 
 }

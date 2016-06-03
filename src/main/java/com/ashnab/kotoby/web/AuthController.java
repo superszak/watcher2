@@ -1,5 +1,6 @@
 package com.ashnab.kotoby.web;
 
+import org.hibernate.annotations.SourceType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +17,7 @@ public class AuthController {
     @RequestMapping("*")
     public String hello(HttpServletRequest request) {
         System.out.println(request.getServletPath());
+        System.out.println("\n\n\n!!!\nHELO MOT\n!!!\n\n\n");
         return "connect/twitterConnected";
     }
 
