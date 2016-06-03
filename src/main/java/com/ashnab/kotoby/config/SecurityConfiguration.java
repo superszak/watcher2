@@ -32,11 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
+                //.csrf()
+                //.disable()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/authenticate")
+                //.defaultSuccessUrl("http://portalwatcher.superprojekt.tai.com")
                 .failureUrl("/login?param.error=bad_credentials")
                 .permitAll()
                 .and()
