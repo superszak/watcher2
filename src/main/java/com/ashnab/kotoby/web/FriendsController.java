@@ -42,7 +42,12 @@ public class FriendsController {
 
         model.addAttribute(twitter.userOperations().getUserProfile());
         CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
-        model.addAttribute("friends", followers);
-        return "connect/twitterConnected";
+        CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
+        model.addAttribute("friends", friends);
+        model.addAttribute("followers", followers);
+        System.out.println("tweeting");
+        twitter.timelineOperations().updateStatus("Spring Social is awesome!");
+        //return "connect/twitterConnected";
+        return "hello";
     }
 }

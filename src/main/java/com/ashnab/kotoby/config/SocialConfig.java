@@ -22,7 +22,6 @@ import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.sql.DataSource;
 
@@ -30,8 +29,10 @@ import javax.sql.DataSource;
 @EnableSocial
 public class SocialConfig implements SocialConfigurer {
 
-    private String key;
-    private String secret;
+    private String fKey;
+    private String fSecret;
+    private String tKey;
+    private String tSecret;
 
     @Autowired
     private DataSource dataSource;
@@ -41,11 +42,11 @@ public class SocialConfig implements SocialConfigurer {
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
-        this.key = environment.getProperty("spring.social.twitter.consumerKey");
-        this.secret = environment.getProperty("spring.social.twitter.consumerSecret");
+        this.tKey = environment.getProperty("spring.social.twitter.consumerKey");
+        this.tSecret = environment.getProperty("spring.social.twitter.consumerSecret");
         connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(
-                key,
-                secret));
+                tKey,
+                tSecret));
     }
 
     @Override
@@ -59,11 +60,18 @@ public class SocialConfig implements SocialConfigurer {
         repository.setConnectionSignUp(new AccountConnectionSignUpService(usersDao));
         return repository;
     }
+/*
+    @Bean
+    @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+    public Facebook facebook(ConnectionRepository connectionRepository) {
+        Connection<Facebook> facebook = connectionRepository.findPrimaryConnection(Facebook.class);
+        return facebook != null ? facebook.getApi() : new FacebookTemplate();
+    }*/
 
     @Bean
     @Scope(value="request", proxyMode= ScopedProxyMode.INTERFACES)
     public Twitter twitter(ConnectionRepository connectionRepository) {
         Connection<Twitter> twitter = connectionRepository.findPrimaryConnection(Twitter.class);
-        return (twitter != null) ? twitter.getApi() : new TwitterTemplate(key, secret);
+        return (twitter != null) ? twitter.getApi() : new TwitterTemplate(tKey, tSecret);
     }
 }
