@@ -8,14 +8,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.social.security.SpringSocialConfigurer;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
@@ -35,14 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.headers().httpStrictTransportSecurity().xssProtection()
-                .and().authorizeRequests().anyRequest().fullyAuthenticated()
-                .and().csrf().disable();
-
-        http.httpBasic().authenticationEntryPoint(authenticationEntryPoint());
-        http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
-
-        /*http
+        http
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/authenticate")
@@ -55,12 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                 .and()
-                .apply(new SpringSocialConfigurer());*/
-    }
-
-    @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint() {
-        return (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                .apply(new SpringSocialConfigurer());
     }
 
     @Bean
