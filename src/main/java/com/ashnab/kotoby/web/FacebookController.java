@@ -14,6 +14,7 @@ import java.util.List;
 
 @Controller
 //@RequestMapping("/")
+@RequestMapping("/auth/facebook")
 public class FacebookController {
 
     private Facebook facebook;
