@@ -7,6 +7,7 @@ import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import java.util.List;
 
+@Controller
+@RequestMapping("/")
 public class AuthController {
 
     private Facebook facebook;
