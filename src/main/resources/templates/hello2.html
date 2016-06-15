@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello Facebook</title>
+</head>
+<body>
+<!-- -->
+<h3>Hello, <span th:text="${fbProfile.name}">Some User</span>!</h3>
+
+<h4>These are your friends:</h4>
+<ul>
+    <li th:each="friend:${friends}" th:text="${friend.name}">Friend</li>
+</ul>
+<!--
+<h4>These are your followers:</h4>
+<ul>
+    <li th:each="follower:${followers}" th:text="${follower.name}">Follower</li>
+</ul>
+
+<h4>Latest posts:</h4>
+<ul>
+    <li th:each="post:${posts}" th:text="${post.text}">Post</li>
+</ul>
+-->
+</body>
+</html>

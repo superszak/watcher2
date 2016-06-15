@@ -18,10 +18,15 @@ import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+
+
 
 import javax.sql.DataSource;
 
@@ -44,9 +49,11 @@ public class SocialConfig implements SocialConfigurer {
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
         this.tKey = environment.getProperty("spring.social.twitter.consumerKey");
         this.tSecret = environment.getProperty("spring.social.twitter.consumerSecret");
-        connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(
-                tKey,
-                tSecret));
+        this.fKey = environment.getProperty("spring.social.facebook.consumerKey");
+        this.fSecret = environment.getProperty("spring.social.facebook.consumerSecret");
+
+        connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(tKey,tSecret));
+        connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(fKey,fSecret));
     }
 
     @Override
@@ -60,13 +67,13 @@ public class SocialConfig implements SocialConfigurer {
         repository.setConnectionSignUp(new AccountConnectionSignUpService(usersDao));
         return repository;
     }
-/*
+
     @Bean
     @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
     public Facebook facebook(ConnectionRepository connectionRepository) {
         Connection<Facebook> facebook = connectionRepository.findPrimaryConnection(Facebook.class);
         return facebook != null ? facebook.getApi() : new FacebookTemplate();
-    }*/
+    }
 
     @Bean
     @Scope(value="request", proxyMode= ScopedProxyMode.INTERFACES)
