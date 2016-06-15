@@ -17,8 +17,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -73,5 +76,16 @@ public class TwitterController {
             //return "redirect:login";
             return "hello";
         }
+    }
+
+    @RequestMapping(value = "/retweet.htm", method = RequestMethod.GET)
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
+        twitter.timelineOperations().retweet(tweets.get(9).getId());
+        System.out.println("retweeting");
+
+        ModelAndView mav = new ModelAndView("retweet");
+        return mav;
     }
 }
