@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/")
+@RequestMapping("/")
 public class TwitterController {
 
     private Twitter twitter;
@@ -60,6 +60,7 @@ public class TwitterController {
             CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
             CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
             List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
+
             model.addAttribute("friends", friends);
             model.addAttribute("followers", followers);
             model.addAttribute("posts", tweets);

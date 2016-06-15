@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class FacebookController {
 
     private Facebook facebook;
