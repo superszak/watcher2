@@ -16,5 +16,10 @@
 <ul>
     <li th:each="follower:${followers}" th:text="${follower.name}">Follower</li>
 </ul>
+
+<h4>Latest posts:</h4>
+<ul>
+    <li th:each="post:${posts}" th:text="${post.text}">Post</li>
+</ul>
 </body>
 </html>

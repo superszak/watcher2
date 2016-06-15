@@ -5,6 +5,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.CursoredList;
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Controller
 public class FriendsController {
@@ -43,10 +45,12 @@ public class FriendsController {
         model.addAttribute(twitter.userOperations().getUserProfile());
         CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
         CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
+        List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
         model.addAttribute("friends", friends);
         model.addAttribute("followers", followers);
+        model.addAttribute("posts", tweets);
         System.out.println("tweeting");
-        twitter.timelineOperations().updateStatus("Spring Social is awesome!");
+        //twitter.timelineOperations().updateStatus("Spring Social is awesome!");
         //return "connect/twitterConnected";
         return "hello";
     }
