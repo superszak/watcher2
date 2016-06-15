@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 //@RequestMapping("/")
-@RequestMapping("/")
+@RequestMapping("/hello2")
 public class FacebookController {
 
     private Facebook facebook;

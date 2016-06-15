@@ -22,8 +22,8 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Controller
-@RequestMapping("hello")
-//@RequestMapping("/")
+//@RequestMapping("hello")
+@RequestMapping("/")
 public class TwitterController {
 
     private Twitter twitter;
