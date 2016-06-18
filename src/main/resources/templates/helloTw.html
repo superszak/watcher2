@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Hello Facebook</title>
+    <title>Hello Twitter</title>
 </head>
 <body>
 <!-- -->
-<h3>Hello, <span th:text="${fbProfile.name}">Some User</span>!</h3>
+<p><a th:href="@{/auth/facebook}"><img th:src="@{/images/signinfb.png}" border="0"/></a></p>
+<h3>Hello, <span th:text="${twitterProfile.name}">Some User</span>!</h3>
 
 <h4>These are your friends:</h4>
 <ul>
     <li th:each="friend:${friends}" th:text="${friend.name}">Friend</li>
 </ul>
-<!--
+
 <h4>These are your followers:</h4>
 <ul>
     <li th:each="follower:${followers}" th:text="${follower.name}">Follower</li>
@@ -21,6 +22,8 @@
 <ul>
     <li th:each="post:${posts}" th:text="${post.text}">Post</li>
 </ul>
--->
+
+<h4>Tests:</h4>
+<input type="button" onclick="retweet.htm" value="RETWEET"><a href="retweet.htm">Retweet</a></input>
 </body>
 </html>

@@ -30,12 +30,12 @@ public class AuthController {
     }
 
     @RequestMapping(method= RequestMethod.GET)
-    public String helloTwitter(Model model) {
+    public String hello(Model model) {
 
         boolean hasFb;
         boolean hasTwitter;
 
-        //System.out.println("IM NOW TRYNA TO GET REDIRECTED");
+        System.out.println("IM NOW TRYNA TO GET REDIRECTED");
 
         if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
             hasFb = false;
@@ -49,15 +49,18 @@ public class AuthController {
             hasTwitter = true;
         }
 
-
-        if (hasTwitter) {
+        if (hasTwitter && hasFb) {
             getTwitterContent(model, twitter);
-        }
-        if (hasFb) {
             getFacebookContent(model, facebook);
+            return "helloAll";
+        } else if (hasTwitter) {
+            getTwitterContent(model, twitter);
+            return "helloTw";
+        } else {
+            getFacebookContent(model, facebook);
+            return "helloFb";
         }
 
-        return "hello";
     }
 
     private void getTwitterContent (Model model, Twitter twitter) {
