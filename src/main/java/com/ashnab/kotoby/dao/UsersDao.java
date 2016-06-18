@@ -20,9 +20,9 @@ public class UsersDao {
 
     public void createUser(String username)
     {
-        jdbcTemplate.update("CREATE table users(username varchar(255) not null, password varchar(255), enabled boolean);");
+        jdbcTemplate.update("CREATE table users(username varchar(255), password varchar(255), enabled boolean);");
         jdbcTemplate.update("INSERT into users(username,password,enabled) values(?,?,true)",username, RandomStringUtils.randomAlphanumeric(8));
-        jdbcTemplate.update("CREATE table authorities(username varchar(255) not null, authority varchar(50));");
+        jdbcTemplate.update("CREATE table authorities(username varchar(255), authority varchar(50));");
         jdbcTemplate.update("INSERT into authorities(username,authority) values(?,?)",username,"USER");
     }
 }
