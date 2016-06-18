@@ -38,6 +38,7 @@ public class SocialConfig implements SocialConfigurer {
     private String fSecret;
     private String tKey;
     private String tSecret;
+    private String fToken;
 
     @Autowired
     private DataSource dataSource;
@@ -45,12 +46,24 @@ public class SocialConfig implements SocialConfigurer {
     @Autowired
     private UsersDao usersDao;
 
+
+    @Autowired
+    public void setDataSource( DataSource dataSource ) {
+        this.dataSource = dataSource;
+    }
+
+    @Autowired
+    public void setUsersDao( UsersDao usersDao ) {
+        this.usersDao = usersDao;
+    }
+
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
         this.tKey = environment.getProperty("spring.social.twitter.consumerKey");
         this.tSecret = environment.getProperty("spring.social.twitter.consumerSecret");
         this.fKey = environment.getProperty("spring.social.facebook.consumerKey");
         this.fSecret = environment.getProperty("spring.social.facebook.consumerSecret");
+        this.fToken = environment.getProperty("spring.social.facebook.accessToken");
 
         connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(tKey,tSecret));
         connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(fKey,fSecret));
@@ -72,7 +85,15 @@ public class SocialConfig implements SocialConfigurer {
     @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
     public Facebook facebook(ConnectionRepository connectionRepository) {
         Connection<Facebook> facebook = connectionRepository.findPrimaryConnection(Facebook.class);
-        return facebook != null ? facebook.getApi() : new FacebookTemplate();
+        Facebook fb = null;
+
+        if (facebook != null) {
+            fb = facebook.getApi();
+        } else {
+            fb = new FacebookTemplate(fToken);
+        }
+
+        return fb;
     }
 
     @Bean

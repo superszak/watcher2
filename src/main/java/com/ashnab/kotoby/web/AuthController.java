@@ -24,7 +24,8 @@ public class AuthController {
     private ConnectionRepository connectionRepository;
 
     @Inject
-    public AuthController(Twitter twitter, ConnectionRepository connectionRepository) {
+    public AuthController(Facebook facebook, Twitter twitter, ConnectionRepository connectionRepository) {
+        this.facebook = facebook;
         this.twitter = twitter;
         this.connectionRepository = connectionRepository;
     }

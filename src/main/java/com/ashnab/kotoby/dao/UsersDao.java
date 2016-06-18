@@ -16,13 +16,13 @@ public class UsersDao {
     public UsersDao(DataSource dataSource)
     {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update("CREATE table if not exists users(username varchar(255), password varchar(255), enabled boolean);");
+        jdbcTemplate.update("CREATE table if not exists authorities(username varchar(255), authority varchar(50));");
     }
 
     public void createUser(String username)
     {
-        jdbcTemplate.update("CREATE table if not exists users(username varchar(255), password varchar(255), enabled boolean);");
         jdbcTemplate.update("INSERT into users(username,password,enabled) values(?,?,true)",username, RandomStringUtils.randomAlphanumeric(8));
-        jdbcTemplate.update("CREATE table if not exists authorities(username varchar(255), authority varchar(50));");
         jdbcTemplate.update("INSERT into authorities(username,authority) values(?,?)",username,"USER");
     }
 }
