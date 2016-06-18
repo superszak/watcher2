@@ -9,7 +9,6 @@ public class RetweetController {
 
     @RequestMapping("/retweet")
     public String goBack () {
-        System.out.println("IM In retweet cotnrolerq");
         OperationCenter.retweetOn();
         return "retweet";
     }

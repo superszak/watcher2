@@ -2,10 +2,8 @@ package com.ashnab.kotoby.web;
 
 import com.ashnab.kotoby.config.OperationCenter;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -39,7 +35,6 @@ public class TwitterController {
         if (OperationCenter.toRetweet() == 1) {
             twitter.timelineOperations().retweet(tweets.get(9).getId());
             System.out.println("retweeting");
-
             OperationCenter.retweetOff();
         }
         /*
@@ -53,7 +48,6 @@ public class TwitterController {
         //twitter.timelineOperations().updateStatus("Spring Social is awesome!");
         //return "connect/twitterConnected";
         */
-        System.out.println("IMA IN twiter controler");
         return "helloTw";
     }
 

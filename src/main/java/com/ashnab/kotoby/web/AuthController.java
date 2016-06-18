@@ -3,11 +3,7 @@ package com.ashnab.kotoby.web;
 import com.ashnab.kotoby.config.OperationCenter;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.twitter.api.CursoredList;
-import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -37,8 +32,6 @@ public class AuthController {
 
         boolean hasFb;
         boolean hasTwitter;
-
-        System.out.println("IM NOW TRYNA TO GET REDIRECTED");
 
         OperationCenter.retweetInit();
 
