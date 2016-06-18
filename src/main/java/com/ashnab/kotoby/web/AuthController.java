@@ -24,8 +24,9 @@ public class AuthController {
     private ConnectionRepository connectionRepository;
 
     @Inject
-    public AuthController(Twitter twitter, ConnectionRepository connectionRepository) {
+    public AuthController(Twitter twitter, Facebook facebook, ConnectionRepository connectionRepository) {
         this.twitter = twitter;
+        this.facebook = facebook;
         this.connectionRepository = connectionRepository;
     }
 
@@ -43,7 +44,6 @@ public class AuthController {
             hasFb = true;
         }
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            //return "redirect:/connect/twitter";
             hasTwitter = false;
         } else {
             hasTwitter = true;
