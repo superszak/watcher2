@@ -1,5 +1,6 @@
 package com.ashnab.kotoby.web;
 
+import com.ashnab.kotoby.config.OperationCenter;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
@@ -29,10 +30,18 @@ public class TwitterController {
         this.connectionRepository = connectionRepository;
     }
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET)
     public String helloTwitter(Model model) {
-
         model.addAttribute(twitter.userOperations().getUserProfile());
+
+        if (OperationCenter.toRetweet() == 1) {
+            List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
+            twitter.timelineOperations().retweet(tweets.get(9).getId());
+            System.out.println("retweeting");
+
+            OperationCenter.retweetOff();
+        }
+        /*
         CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
         CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
         List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
@@ -43,17 +52,17 @@ public class TwitterController {
         System.out.println("tweeting");
         //twitter.timelineOperations().updateStatus("Spring Social is awesome!");
         //return "connect/twitterConnected";
+        */
+        System.out.println("IMA IN twiter controler");
         return "helloTw";
     }
 
-    @RequestMapping(value = "/retweet", method = RequestMethod.GET)
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+    @RequestMapping(value="retweet", method=RequestMethod.GET)
+    public ModelAndView str() {
         List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
         twitter.timelineOperations().retweet(tweets.get(9).getId());
         System.out.println("retweeting");
-
-        ModelAndView mav = new ModelAndView("retweet");
-        return mav;
+        return new ModelAndView("retweet");
     }
+
 }
