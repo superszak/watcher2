@@ -18,7 +18,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("helloTw")
-//@RequestMapping("/")
 public class TwitterController {
 
     private Twitter twitter;
@@ -47,7 +46,7 @@ public class TwitterController {
         return "helloTw";
     }
 
-    @RequestMapping(value = "/retweet.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/retweet", method = RequestMethod.GET)
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
