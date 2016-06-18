@@ -33,9 +33,10 @@ public class TwitterController {
     @RequestMapping(method=RequestMethod.GET)
     public String helloTwitter(Model model) {
         model.addAttribute(twitter.userOperations().getUserProfile());
+        List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
+        model.addAttribute("posts", tweets);
 
         if (OperationCenter.toRetweet() == 1) {
-            List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
             twitter.timelineOperations().retweet(tweets.get(9).getId());
             System.out.println("retweeting");
 
@@ -44,7 +45,6 @@ public class TwitterController {
         /*
         CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
         CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
-        List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
 
         model.addAttribute("friends", friends);
         model.addAttribute("followers", followers);
