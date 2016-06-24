@@ -2,22 +2,33 @@ package com.ashnab.kotoby.config;
 
 public class OperationCenter {
 
-    private static int retweet;
+    private static boolean toRetweet;
+
+    private static int retweetNo;
 
     public static void retweetInit () {
-        retweet = 0;
+        toRetweet = false;
+        retweetNo = -1;
     }
 
-    public static void retweetOn () {
-        retweet = 1;
+    public static void retweetOn (int no) {
+        if (no >= 0) {
+            toRetweet = true;
+            retweetNo = no;
+        }
     }
 
     public static void retweetOff () {
-        retweet = 0;
+        toRetweet = false;
+        retweetNo = -1;
     }
 
-    public static int toRetweet () {
-        return retweet;
+    public static boolean toRetweet () {
+        return toRetweet;
+    }
+
+    public static int retweetNo() {
+        return retweetNo;
     }
 
 }

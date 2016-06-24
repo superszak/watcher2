@@ -32,15 +32,15 @@ public class TwitterController {
         List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
         model.addAttribute("posts", tweets);
 
-        if (OperationCenter.toRetweet() == 1) {
-            twitter.timelineOperations().retweet(tweets.get(9).getId());
+        if (OperationCenter.toRetweet()) {
+            twitter.timelineOperations().retweet(tweets.get(OperationCenter.retweetNo()).getId());
             System.out.println("retweeting");
             OperationCenter.retweetOff();
         }
 
         return "helloTw";
     }
-
+/*
     @RequestMapping(value="retweet", method=RequestMethod.GET)
     public ModelAndView str() {
         List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
@@ -48,5 +48,5 @@ public class TwitterController {
         System.out.println("retweeting");
         return new ModelAndView("retweet");
     }
-
+*/
 }
