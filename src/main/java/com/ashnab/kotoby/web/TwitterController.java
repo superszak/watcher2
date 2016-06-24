@@ -37,17 +37,7 @@ public class TwitterController {
             System.out.println("retweeting");
             OperationCenter.retweetOff();
         }
-        /*
-        CursoredList<TwitterProfile> followers = twitter.friendOperations().getFollowers();
-        CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
 
-        model.addAttribute("friends", friends);
-        model.addAttribute("followers", followers);
-        model.addAttribute("posts", tweets);
-        System.out.println("tweeting");
-        //twitter.timelineOperations().updateStatus("Spring Social is awesome!");
-        //return "connect/twitterConnected";
-        */
         return "helloTw";
     }
 

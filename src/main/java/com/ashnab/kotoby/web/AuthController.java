@@ -41,21 +41,16 @@ public class AuthController {
             hasFb = true;
         }
         if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            //return "redirect:/connect/twitter";
             hasTwitter = false;
         } else {
             hasTwitter = true;
         }
 
         if (hasTwitter && hasFb) {
-           // getTwitterContent(model, twitter);
-            //getFacebookContent(model, facebook);
             return new ModelAndView("redirect:/helloAll");
         } else if (hasTwitter) {
-            //getTwitterContent(model, twitter);
             return new ModelAndView("redirect:/helloTw");
         } else {
-            //getFacebookContent(model, facebook);
             return new ModelAndView("redirect:/helloFb");
         }
 
