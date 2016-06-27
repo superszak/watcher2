@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.inject.Inject;
 
 @Controller
-@RequestMapping(value = {"/", "signup#_=_", "signup"})
+@RequestMapping(value = {"/", "signup#_=_", "signup", "signin"})
 //@RequestMapping("/")
 public class AuthController {
 
