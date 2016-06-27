@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+/*
         http
                 .formLogin()
                 .loginPage("/login")
@@ -43,6 +43,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/favicon.ico", "/static-resources/**").permitAll()
                 .antMatchers("/**").authenticated()
+                .and()
+                .rememberMe()
+                .and()
+                .apply(new SpringSocialConfigurer());
+                */
+        http
+                .authorizeRequests()
+                .anyRequest()
+                .permitAll()
                 .and()
                 .rememberMe()
                 .and()

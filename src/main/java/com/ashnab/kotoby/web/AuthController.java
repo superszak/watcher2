@@ -13,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.inject.Inject;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping(value = {"/", "signup#_=_", "signup"})
+//@RequestMapping("/")
 public class AuthController {
 
     private Facebook facebook;
@@ -45,13 +46,15 @@ public class AuthController {
         } else {
             hasTwitter = true;
         }
-
+        System.out.println(hasFb);
         if (hasTwitter && hasFb) {
             return new ModelAndView("redirect:/helloAll");
         } else if (hasTwitter) {
             return new ModelAndView("redirect:/helloTw");
-        } else {
+        } else if (hasFb) {
             return new ModelAndView("redirect:/helloFb");
+        } else {
+            return new ModelAndView("redirect:/helloNothing");
         }
 
     }

@@ -23,6 +23,6 @@ public class UsersDao {
     public void createUser(String username)
     {
         jdbcTemplate.update("INSERT into users(username,password,enabled) values(?,?,true)",username, RandomStringUtils.randomAlphanumeric(8));
-        jdbcTemplate.update("INSERT into authorities(username,authority) values(?,?)",username,"USER");
+        jdbcTemplate.update("INSERT into authorities(username,authority) values(?,?)",username,"ADMIN");
     }
 }
