@@ -34,7 +34,6 @@ public class TwitterController {
 
         if (OperationCenter.toRetweet()) {
             twitter.timelineOperations().retweet(tweets.get(OperationCenter.retweetNo()).getId());
-            System.out.println("retweeting");
             OperationCenter.retweetOff();
         }
 
