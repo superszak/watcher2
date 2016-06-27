@@ -1,2 +1,3 @@
-web: mvn exec:java -Dexec.mainClass="src/main/java/com/ashnab/kotoby/runner/Application.java"
+web: java -cp target/classes:target/dependency/* com.ashnab.kotoby.runner.Application 
+
 
