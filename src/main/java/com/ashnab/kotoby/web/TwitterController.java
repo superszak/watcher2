@@ -38,15 +38,11 @@ public class TwitterController {
             OperationCenter.retweetOff();
         }
 
+        if (OperationCenter.toLike()) {
+            twitter.timelineOperations().addToFavorites(tweets.get(OperationCenter.likeNo()).getId());
+            OperationCenter.likeOff();
+        }
+
         return "helloTw";
     }
-/*
-    @RequestMapping(value="retweet", method=RequestMethod.GET)
-    public ModelAndView str() {
-        List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
-        twitter.timelineOperations().retweet(tweets.get(9).getId());
-        System.out.println("retweeting");
-        return new ModelAndView("retweet");
-    }
-*/
 }

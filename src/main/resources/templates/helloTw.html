@@ -33,6 +33,7 @@
          <td><b>FromUser</b></td>
          <td><b>Post</b></td>
          <td><b>Retweet</b></td>
+         <td><b>Add to favs</b></td>
      </tr>
      <tr th:each="post:${posts}">
          <td th:text="${post.fromUser}">FromUser</td>
@@ -46,9 +47,12 @@
 
             var text = '<td><a href="retweet\n">Retweet</a></td>';
             var link = text.replace("\n", id_str);
-
-            //console.log(text);
             document.write(link);
+
+            var text = '<td><a href="twlike\n">Like</a></td>';
+            var link = text.replace("\n", id_str);
+            document.write(link);
+
             id++;
          </script>
      </tr>
