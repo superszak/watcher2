@@ -10,7 +10,7 @@ version="2.0">
             <default-locale>en</default-locale>
         </locale-config>
         <message-bundle>
-            Message
+            com.ashnab.kotoby.message;
         </message-bundle>
     </application>
 </faces-config>
