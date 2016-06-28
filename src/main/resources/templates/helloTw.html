@@ -30,12 +30,14 @@
  <h4>Latest posts:</h4>
  <table border="1">
      <tr>
+         <td><b>Portal</b></td>
          <td><b>FromUser</b></td>
          <td><b>Post</b></td>
          <td><b>Retweet</b></td>
          <td><b>Add to favs</b></td>
      </tr>
      <tr th:each="post:${posts}">
+         <td th:text="${portal}">Portal</td>
          <td th:text="${post.fromUser}">FromUser</td>
          <td th:text="${post.text}">Post</td>
          <!-- <td><a href="retweet">Retweet</a></td> -->

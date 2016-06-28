@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -28,6 +27,7 @@ public class TwitterController {
 
     @RequestMapping(method=RequestMethod.GET)
     public String helloTwitter(Model model) {
+        model.addAttribute("portal", "twitter");
         model.addAttribute(twitter.userOperations().getUserProfile());
         List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
         model.addAttribute("posts", tweets);

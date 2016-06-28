@@ -25,6 +25,7 @@ public class FacebookController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String helloFacebook (Model model) {
+        model.addAttribute("portal", "facebook");
         model.addAttribute(facebook.userOperations().getUserProfile());
         //List<FacebookProfile> friends = facebook.friendOperations().getFriendProfiles();
         //model.addAttribute("friends", friends);
