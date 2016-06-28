@@ -38,7 +38,6 @@ public class SocialConfig implements SocialConfigurer {
     private String fSecret;
     private String tKey;
     private String tSecret;
-    private String fToken;
 
     @Autowired
     private DataSource dataSource;
@@ -63,7 +62,6 @@ public class SocialConfig implements SocialConfigurer {
         this.tSecret = environment.getProperty("spring.social.twitter.consumerSecret");
         this.fKey = environment.getProperty("spring.social.facebook.consumerKey");
         this.fSecret = environment.getProperty("spring.social.facebook.consumerSecret");
-        this.fToken = environment.getProperty("spring.social.facebook.accessToken");
 
         connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(tKey,tSecret));
         connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(fKey,fSecret));
